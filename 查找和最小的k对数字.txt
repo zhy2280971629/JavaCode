@@ -1,0 +1,35 @@
+给定两个以升序排列的整形数组 nums1 和 nums2, 以及一个整数 k。
+定义一对值 (u,v)，其中第一个元素来自 nums1，第二个元素来自 nums2。
+
+找到和最小的 k 对数字 (u1,v1), (u2,v2) ... (uk,vk)。
+
+示例 1:
+输入: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+输出: [1,2],[1,4],[1,6]
+解释: 返回序列中的前 3 对数：
+     [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
+
+public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> ret = new ArrayList<>();
+        PriorityQueue<int[]> q = new PriorityQueue<>((o1, o2) -> compare(o2, o1));
+        for(int i : nums1){
+            for(int j : nums2){
+                int[] arr = new int[]{i , j};
+                if(q.size() < k){
+                    q.offer(arr);
+                }
+                else if(!q.isEmpty() && compare(q.peek(), arr) > 0){
+                    q.poll();
+                    q.offer(arr);
+                }
+            }
+        }
+        while(!q.isEmpty()){
+            int[] arr1 = q.poll();
+            ret.add(Arrays.asList(arr1[0], arr1[1]));
+        }
+        return ret;
+    }
+    private int compare(int[] arr1, int[] arr2){
+        return (arr1[0] + arr1[1]) - (arr2[0] + arr2[1]);
+    }

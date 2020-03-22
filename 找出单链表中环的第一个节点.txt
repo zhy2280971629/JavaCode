@@ -1,0 +1,21 @@
+public ListNode datectCycle(){
+        ListNode fast=this.head;
+        ListNode slow=this.head;
+        while(fast!=null&&fast.next!=null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                //fast=this.head;
+                break;
+            }
+            if(fast!=null||fast.next!=null){
+                return null;
+            }
+        }
+        fast=this.head;
+        while(fast!=slow){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return fast;
+    }

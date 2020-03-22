@@ -1,0 +1,22 @@
+1.递归
+public static void printFromTailToHead(Node head){
+   if(head!=null){
+   printFromTailToHead(head.next);
+   }
+   System.out.println(head.data);
+}
+2.循环
+public static void printFromTailToHead(Node head){
+  Node cur = head;
+  Stack<Node> s = new Stack();
+  while(cur != null){
+   s.push(cur);
+   cur = cur.next;
+   }
+//将栈中元素出栈
+  while(!s.empty()){
+  Node top = s.peek();
+  System.out.println(top.data);
+  s.pop();
+ }
+}

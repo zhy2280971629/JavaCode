@@ -1,0 +1,14 @@
+public class Test{
+	public static int numberOfOne(int num){
+		int count=0;
+		while(num!=0){
+			count++;
+			num=num&(num-1);
+		}
+return count;
+}		
+		public static void main(String[] args){
+			int ret=numberOfOne(15);
+			System.out.println(ret);
+	}	
+}	

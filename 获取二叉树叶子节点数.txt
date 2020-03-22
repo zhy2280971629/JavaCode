@@ -1,0 +1,17 @@
+public class BTnode {
+    int val;
+    BTnode left = null;
+    BTnode right = null;
+    public BTnode(int val){
+        this.val = val;
+    }
+public int getLeafCount(BTnode root){
+        if(null == root){
+            return 0;
+        }
+        if(root.left == null && root.right == null){
+            return 1;
+        }
+        return getLeafCount(root.left) + getLeafCount(root.right);
+    }
+}

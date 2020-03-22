@@ -1,0 +1,60 @@
+请你来实现一个 atoi 函数，使其能将字符串转换成整数。
+示例 1:
+输入: "4193 with words"
+输出: 4193
+解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。
+示例 2:
+输入: "words and 987"
+输出: 0
+解释: 第一个非空字符是 'w', 但它不是数字或正、负号。
+     因此无法执行有效的转换。
+示例 3:
+输入: "-91283472332"
+输出: -2147483648
+解释: 数字 "-91283472332" 超过 32 位有符号整数范围。 
+     因此返回 INT_MIN (−231) 。
+public int myAtoi(String str) {
+        if(str == null || str.length() == 0){
+            return 0;
+        }
+        int flag = 0;
+        int i = 0;
+        while(i < str.length() && str.charAt(i) == ' '){
+            i++;
+        }
+        if(i >= str.length()){
+            return 0;
+        }
+        StringBuilder sb = new StringBuilder();
+        if(str.charAt(i) == '-'){
+            flag = 1;
+            i++;
+        }else if(str.charAt(i) == '+'){
+            flag = 0;
+            i++;
+        }
+        if(i < str.length() && str.charAt(i) >= '0' &&
+        str.charAt(i) <= '9'){
+            while(i <str.length() && str.charAt(i) >= '0' &&
+            str.charAt(i) <= '9'){
+                sb.append(str.charAt(i));
+                i++;
+            }
+        }else{
+            return 0;
+        }
+        try{
+            int x = Integer.parseInt(sb.toString());
+            if(flag > 0){
+                return -x;
+            }else{
+                return x;
+            }
+        }catch(NumberFormatException e){
+            if(flag > 0){
+                return Integer.MIN_VALUE;
+            }else{
+                return Integer.MAX_VALUE;
+            }
+        }
+    }

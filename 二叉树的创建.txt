@@ -1,0 +1,24 @@
+public class binTree {
+    private BTNode root = null;//引用二叉树的根节点
+    private int index = 0;
+
+    public binTree(int[] array, int invalid){
+        root = createbinTree(array, invalid);
+    }
+
+    BTNode createbinTree(int[] array, int invalid){
+        //创建新的根节点
+        BTNode newRoot = null;
+        if(index < array.length && array[index] != invalid) {
+            newRoot = new BTNode(array[index]);
+            //创建根的左子树
+            ++index;
+            newRoot.left = createbinTree(array, invalid);
+            //创建根的右子树
+
+            ++index;
+            newRoot.right = createbinTree(array, invalid);
+        }
+        return newRoot;
+    }
+}

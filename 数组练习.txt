@@ -1,0 +1,372 @@
+1.数组传递（通过函数）
+public class ArrayExercise {
+    public static void main(String[] args) {
+        int[] array1=fuc();
+        for (int x : array1) {
+            System.out.print(x+" ");
+        }
+    }
+    public static int[] fuc(){
+        int[] array2={1,2,3,4,5};
+        return array2;
+    }
+}
+2.写一个方法，将数组中每个元素乘2（会破会原有数组）
+public class ArrayRidTwo {
+    public static void main(String[] args) {
+        int[] array = new int[]{1,2,3,4,5,6};
+        arrayRidTwo(array);
+        print(array);
+    }
+    public static void arrayRidTwo(int[] array){
+        for (int i = 0; i <array.length ; i++) {
+            array[i]*=2;
+        }
+    }
+    public static void print(int[] array){
+        for (int x: array) {
+            System.out.print(x+" ");
+        }
+    }
+}
+3.写一个方法，将数组中每个元素乘2（不会破会原有数组）
+public class ArrayRidTwo {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6};
+        int[] output = transform(array);
+        print(array);
+        System.out.println("\n");
+        print(output);
+
+    }
+    public static int[] transform(int[] array){
+        int[] ret = new int[array.length];
+        for(int i=0;i<array.length;i++){
+           ret[i]=array[i]*2;
+        }
+        return ret;
+    }
+    public static void print(int[] array){
+        for (int x: array) {
+            System.out.print(x+" ");
+        }
+    }
+}
+4.将数组转换为字符串（引用包Arrays，调用Array.toString方法）
+import java.util.Arrays;
+public class ArrayToString {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5};
+        String newArray = Arrays.toString(array);
+        System.out.println("newArray是"+newArray);
+    }
+}
+5.将数组转换为字符串（自定义方法）
+public class ArrayToString2 {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6};
+        System.out.println("输出字符串array");
+        System.out.println(ArraytoString(array));
+    }
+    public static String ArraytoString(int[] array){
+        String ret="[";
+        for (int i = 0; i <array.length ; i++) {
+            ret+=array[i];
+            if(i<array.length-1){
+                ret+=",";
+            }
+        }
+        ret+="]";
+        return ret;
+    }
+}
+6.一个新学的函数传递参数时的输入法
+import java.util.Scanner;
+public class RedFuc {
+    public static void main(String[] args) {
+        System.out.println("请输入一个整数");
+        print(new Scanner(System.in).nextInt( ));
+    }
+    public static void print(int num){
+        System.out.println("你的输入是");
+        System.out.println(num);
+    }
+}
+7.通过输入数据个数求数据的平均数
+import java.util.Scanner;
+public class Avg {
+    public static void main(String[] args) {
+        System.out.println("请输入你要求的平均数数字的个数");
+        int[] array = new int[new Scanner(System.in).nextInt()];
+        intPut(array);
+       int result = avg(array);
+        System.out.println("平均数是"+result);
+    }
+    public static void intPut(int array[]){
+        System.out.println("请输入你的数据");
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i <array.length ; i++) {
+            array[i] = scanner.nextInt();
+        }
+    }
+    public static int avg(int[] array ){
+        int sum = 0;
+        for (int i = 0; i <array.length ; i++) {
+            sum+=array[i];
+        }
+        int avg = sum/array.length;
+        return avg;
+    }
+}
+8，数组拷贝1（循环法）
+public class ArraysCopy1 {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6};
+        int[] rec = arrayCopy(array);
+        System.out.println("\n");
+        System.out.print("拷贝后:");
+        for (int x: rec) {
+            System.out.print(+x);
+        }
+    }
+    public static int[] arrayCopy(int[] array){
+        int[] rec = new int[array.length];
+        System.out.print("拷贝前:");
+        for (int x:rec) {
+            System.out.print(x);
+        }
+        for (int i = 0; i <array.length ; i++) {
+            rec[i] = array[i];
+        }
+        return rec;
+    }
+}
+9.数组拷贝2（输出拷贝即System.arraycopy（数组1，开始数，数组2，开始数，长度）法）
+import static java.lang.System.arraycopy;
+public class ArrayCopy2 {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 = new int[array1.length];
+        System.out.print("拷贝前");
+        for (int x : array2) {
+            System.out.print(x);
+        }
+        System.out.println("\n");
+        System.arraycopy(array1,0,array2,0,array1.length);
+        System.out.print("拷贝后");
+        for (int x : array2 ) {
+            System.out.print(x);
+        }
+     }
+}
+10，数组拷贝3（利用Arrays.copyOf(数组名，数组长度)）
+import java.util.Arrays;
+public class ArrayCopy3 {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 =  Arrays.copyOf(array1,array1.length);
+        System.out.print("拷贝后：");
+        for (int x : array2) {
+            System.out.print(x+" ");
+        }
+    }
+}
+11，数组拷贝4（范围拷贝Arrays.copyOfRange(数组名，起始位，结束位)）
+import java.util.Arrays;
+public class RangeCopy {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 = Arrays.copyOfRange(array1,2,4);
+        for(int x : array2){
+            System.out.println(x);
+        }
+    }
+}
+12，查找数组指定元素（遍历查找）
+public class ArrayFind {
+    public static void main(String[] args) {
+        int[] array = {23, 14, 65, 34, 87, 47, 38, 26, 35, 102, 59};
+        System.out.println(find(array, 26));
+    }
+
+    public static int find(int[] arr, int findnum) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == findnum) {
+                return i;
+
+            }
+
+        }
+        return -1;
+    }
+}
+13，查找数组指定元素（二分查找）
+public class BinarySearch{
+    public static void main(String[] args) {
+        int[] array = { 23, 14, 65, 34, 87, 47, 38, 26, 35, 102, 59};
+        System.out.println(binary(array,102));
+    }
+    public static int binary(int[] array,int findnumber ){
+        int left = 0;
+        int right = array.length-1;
+        int mid = 0;
+        while(left<right) {
+             mid = (left+right)/2;
+            if (findnumber > array[mid]) {
+                left = mid+1;
+            } else if (findnumber<array[mid]){
+                right = mid-1;
+            } else {
+                break;
+            }
+        }
+        return mid;
+    }
+}
+14，检查数组是否有序
+public class IsSorted {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,4,5,6,7,5,8};
+        int[] array1 = {1,2,3,4,4,5,6,7,8,9};
+        System.out.println(isSorted(array));
+        System.out.println(isSorted(array1));
+    }
+    public static boolean isSorted(int[] array){
+        for (int i = 0; i <array.length-1 ; i++) {
+            if (array[i]>array[i+1]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+15，冒泡排序法
+public class BubbleSort {
+    public static void main(String[] args) {
+        int[] array = {23,1,12,34,27,109,45,36,87,18,24};
+        bubbleSort(array);
+        for (int x: array) {
+            System.out.println(x);
+        }
+    }
+    public static int[] bubbleSort(int[] array){
+        for (int i = 0; i <array.length-1; i++) {
+            for (int j = 0; j <array.length-i-1 ; j++) {
+                if(array[j]>array[j+1]){
+                    int temp = array[j];
+                    array[j] = array[j+1];
+                    array[j+1] = temp;
+                }
+
+            }
+
+        }
+        return array;
+    }
+
+}
+16，数组排序（调用函数）
+import java.util.Arrays;
+public class ArraySortFunc {
+    public static void main(String[] args) {
+        int[] array = {23,1,12,34,27,109,45,36,87,18,24};
+        Arrays.sort(array);
+        for (int x: array) {
+            System.out.println(x);            
+        }
+    }
+}
+17.数组逆置（while循环）
+public class ArrayReverse {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6,7,8};
+        reverse(array);
+        for (int x : array) {
+            System.out.println(x);
+        }
+    }
+    public static int[ ] reverse(int[] array){
+
+        int left = 0;
+        int right = array.length-1;
+        while(left<right){
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+            left++;
+            right--;
+        }
+       return array;
+    }
+
+}
+18.数组逆置（for循化）
+public class ArrayReverse1 {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6,7,8,9,10};
+        reverse(array);
+        for (int x : array ) {
+            System.out.println(x+" ");
+        }
+    }
+    public static int[] reverse(int[] array){
+        int n = array.length-1;
+        for (int i = 0; i <array.length/2 ; i++) {
+           int temp = array[i];
+           array[i]=array[n];
+           array[n]=temp;
+                n--;
+            }
+            return array;
+        }
+    }
+19，数组中将奇数置后偶数置前（for循环）
+public class TransForm {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+        transForm(array);
+        for (int x : array) {
+            System.out.println(x);
+        }
+    }
+    public static int[] transForm(int[ ] array){
+        for (int i = 0; i <=array.length/2 ; i++) {
+            for (int j = array.length-1; j>=array.length/2 ; j--) {
+                if(array[i]%2!=0&&array[j]%2==0){
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        return array;
+
+    }
+}
+20.数组中将奇数置后偶数置前（while循环）
+public class TransForm2 {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+        transForm(array);
+        for (int x : array) {
+            System.out.println(x);
+        }
+    }
+    public static int[] transForm(int[] array){
+        int left = 0;
+        int right = array.length-1;
+        while(left<right){
+            while(left<right&&array[left]%2==0){
+                left++;
+            }
+            while(left<right&&array[right]%2!=0){
+                right--;
+            }
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+        }
+        return array;
+    }
+}
+

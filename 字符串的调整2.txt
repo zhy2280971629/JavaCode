@@ -1,0 +1,15 @@
+题目描述
+给定一个字符类型的数组chas[],chas右半区全是空字符，左半区不含有空字符。现在想将左半区的空格字符串替换成“%20”，假设chas右半区足够大，可以满足替换需要的空间，请完成替换函数。
+示例1 
+输入
+a  b    c
+输出
+a%20%20b%20%20%20%20c
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        System.out.println(str.replaceAll(" ","%20"));
+    }
+}

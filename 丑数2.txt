@@ -1,0 +1,34 @@
+编写一个程序，找出第 n 个丑数。
+丑数就是只包含质因数 2, 3, 5 的正整数。
+
+示例:
+输入: n = 10
+输出: 12
+解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。
+
+public int nthUglyNumber(int n) {
+        if(n <= 0){
+            return 0;
+        }
+        int[] ret = new int[n];
+        ret[0] = 1;
+        int divisor1 = 0;
+        int divisor2 = 0;
+        int divisor3 = 0;
+        for(int i = 1;i < n;i++){
+            int mul2 = ret[divisor1] * 2;
+            int mul3 = ret[divisor2] * 3;
+            int mul5 = ret[divisor3] * 5;
+            ret[i] = Math.min(mul2, Math.min(mul3, mul5));
+            if(mul2 == ret[i]){
+                divisor1++;
+            }
+            if(mul3 == ret[i]){
+                divisor2++;
+            }
+            if(mul5 == ret[i]){
+                divisor3++;
+            }
+        }
+        return ret[n - 1];
+    }

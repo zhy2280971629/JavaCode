@@ -1,0 +1,13 @@
+import java.util.Scanner;
+public class Main {
+	public static long sum(long n) {
+		long sum=n*(n+1)/2;
+		return sum;
+}
+	public static void main(String[] args) {
+		Scanner input=new Scanner(System.in);
+		long n=input.nextInt();
+		long ret=sum(n);
+		System.out.println(ret);
+	}
+}

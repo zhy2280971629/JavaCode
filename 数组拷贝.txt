@@ -1,0 +1,64 @@
+数组拷贝1（循环法）
+public class ArraysCopy1 {
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5,6};
+        int[] rec = arrayCopy(array);
+        System.out.println("\n");
+        System.out.print("拷贝后:");
+        for (int x: rec) {
+            System.out.print(+x);
+        }
+    }
+    public static int[] arrayCopy(int[] array){
+        int[] rec = new int[array.length];
+        System.out.print("拷贝前:");
+        for (int x:rec) {
+            System.out.print(x);
+        }
+        for (int i = 0; i <array.length ; i++) {
+            rec[i] = array[i];
+        }
+        return rec;
+    }
+}
+数组拷贝2（输出拷贝即System.arraycopy（数组1，开始数，数组2，开始数，长度）法）
+import static java.lang.System.arraycopy;
+public class ArrayCopy2 {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 = new int[array1.length];
+        System.out.print("拷贝前");
+        for (int x : array2) {
+            System.out.print(x);
+        }
+        System.out.println("\n");
+        System.arraycopy(array1,0,array2,0,array1.length);
+        System.out.print("拷贝后");
+        for (int x : array2 ) {
+            System.out.print(x);
+        }
+     }
+}
+数组拷贝3（利用Arrays.copyOf(数组名，数组长度)）
+import java.util.Arrays;
+public class ArrayCopy3 {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 =  Arrays.copyOf(array1,array1.length);
+        System.out.print("拷贝后：");
+        for (int x : array2) {
+            System.out.print(x+" ");
+        }
+    }
+}
+数组拷贝4（范围拷贝Arrays.copyOfRange(数组名，起始位，结束位)）
+import java.util.Arrays;
+public class RangeCopy {
+    public static void main(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        int[] array2 = Arrays.copyOfRange(array1,2,4);
+        for(int x : array2){
+            System.out.println(x);
+        }
+    }
+}

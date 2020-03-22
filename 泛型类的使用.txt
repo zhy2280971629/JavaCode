@@ -1,0 +1,31 @@
+class A<T> {
+    T value;
+    A(T value) {
+        this.value = value;
+    }
+    T get() {
+        return value;
+    }
+}
+class ArrayList<A>{
+    A[] array;
+    int capacity;
+    int size;
+    public ArrayList(int capacity){
+         array = (A[])new Object[capacity];
+        int size = 0;
+        this.capacity= capacity;
+    }
+    public void add(A a){
+        array[size++] = a;
+    }
+    public int size(){
+        return size;
+    }
+    A get(int index){
+        return array[index];
+    }
+    boolean isEmpty(){
+        return 0 == size;
+    }
+}

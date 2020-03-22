@@ -1,0 +1,39 @@
+题目描述
+给定一个整型数组arr，找到其中最小的k个数。
+输入描述:
+输入包含两行，第一行包含两个整数n和k，n代表数组arr的长度，第二行包含n个整数，代表数组arr
+输出描述:
+输出包含一行，k个整数，代表数组中最小的k个整数。
+示例1
+输入
+5 3
+3 5 1 5 2
+输出
+3 1 2
+import java.util.Scanner;
+import java.util.Arrays;
+public class Main{
+    public static int[] findLeastKNumbers(int[] arr,int k){
+        int[] arr1 = new int[k];
+        Arrays.sort(arr);
+        int j = 0;
+        for(int i = 0;i < k;i++){
+            arr1[i] = arr[j];
+            j++;
+            }
+        return arr1;
+        }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int k = scan.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0;i < arr.length;i++){
+            arr[i] = scan.nextInt();
+        }
+        int[] arr1 = findLeastKNumbers(arr,k);
+        for(int i = 0;i < arr1.length;i++){
+            System.out.println(arr1[i]);
+        }
+    }
+}

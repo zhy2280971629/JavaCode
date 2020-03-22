@@ -1,0 +1,14 @@
+public class BTnode {
+    int val;
+    BTnode left = null;
+    BTnode right = null;
+    public BTnode(int val){
+        this.val = val;
+    }
+public int getCount(BTnode root){
+        if(null == root){
+            return 0;
+        }
+        return 1 + getCount(root.left) + getCount(root.right);
+    }
+}

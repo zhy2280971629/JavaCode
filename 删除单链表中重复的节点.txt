@@ -1,0 +1,23 @@
+ public ListNode deleteDuplication() {
+        ListNode node = new ListNode(-1);
+        ListNode cur = this.head;
+        ListNode tmp = node;
+        while (cur != null) {
+            if (cur.next != null &&
+                    cur.data == cur.next.data) {
+                //1、循环
+                //2、退出循环 cur要多走一步
+                while (cur.next != null && cur.data==cur.next.data) {
+                    cur = cur.next;
+                }
+                cur = cur.next;
+            } else {
+                //当前节点 不等于下一个节点的时候
+                tmp.next = cur;
+                cur = cur.next;
+                tmp = tmp.next;
+            }
+        }
+        tmp.next=null;
+        return node.next;
+    }

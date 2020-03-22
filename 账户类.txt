@@ -1,0 +1,69 @@
+import java.util.Date;
+public class Account {
+	private int id ;
+	   private double balance ;
+	   private double annualInterestRate ;
+	   private Date dataCreated =new Date();
+	public Account()
+	{
+	  this.id = 0;
+	  this.balance = 0;
+	  this.annualInterestRate=0;
+	}
+	public Account(int id,int balance)
+	{
+	  this.id = id;
+	  this.balance = balance;
+	}
+	public Date getdataCreated()
+	{
+		return this.dataCreated;
+	}
+	public int getid()
+	{
+		return this.id;
+	}
+	public double getbalance()
+	{
+		return this.balance;
+	}
+	public double getannualInterestRate()
+	{
+		return this.annualInterestRate;
+	}
+	public void setannualInterestRate(double annualInterestRate)
+	{
+		this.annualInterestRate=annualInterestRate;
+	}
+	public void setid(int id)
+	{
+		 this.id = id;
+	}
+	public void setbalance(double balance)
+	{
+		this.balance = balance;
+	}
+	public double getMonthlyInterestRate()
+	{
+		return this.annualInterestRate/12;
+	}
+	public double withDraw(double m)
+	{
+	  this.balance=this.balance-m;
+	  return this.balance;
+	}
+	public double deposit(double m)
+	{
+		this.balance=this.balance+m;
+		return this.balance;
+	}
+	public static void main(String[]args) {
+		Account users = new Account(1122,20000);
+		users.setannualInterestRate(4.5/100);
+		users.withDraw(2500);
+		users.deposit(3000);
+		System.out.print("您的余额为: "+users.getbalance());
+		System.out.print("您的月利息为: "+users.getMonthlyInterestRate()*users.getbalance());
+		System.out.print("您的开户日期为: "+users.getdataCreated().toString());
+	}
+	}

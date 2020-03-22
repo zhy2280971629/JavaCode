@@ -1,0 +1,16 @@
+ //任意位置插入,第一个数据节点为0号下标
+    public boolean addIndex(int index,int data){
+       if(index<0||index>getLength()){
+           System.out.println("index不合法");
+           return false;
+       }
+       if(index==0){
+           addFirst(data);
+           return true;
+       }
+       ListNode cur=searchIndex(index);
+       ListNode node=new ListNode(data);
+       node.next=cur.next;
+       cur.next=node;
+       return true;
+    }

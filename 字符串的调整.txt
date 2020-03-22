@@ -1,0 +1,31 @@
+题目描述
+给定一个字符串chas[],其中只含有字母字符和“*”字符，现在想把所有“*”全部挪到chas的左边，字母字符移到chas的右边。完成调整函数。
+示例
+输入
+o*f*f*e*r
+输出
+****offer
+import java.util.*;
+public class Main{
+    public static String adjust(String str){
+        char[] chas = str.toCharArray();
+        int i = 0;
+        for(i = chas.length-1;chas[i] != '*';i--);
+        int j = 0;
+        for(j = i;i >= 0;i--){
+            if(chas[i] != '*'){
+                chas[j--] = chas[i];
+            }
+        }
+        while(j >= 0){
+            chas[j--] = '*';
+        }
+        return String.copyValueOf(chas);
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        String str1 = adjust(str);
+        System.out.println(str1);
+    }
+}

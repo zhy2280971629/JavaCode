@@ -1,0 +1,25 @@
+public static MyLinkedList.Node mergeList(MyLinkedList.Node headA
+            ,MyLinkedList.Node headB) {
+        MyLinkedList.Node newHead =
+                new MyLinkedList.Node(-1);
+        MyLinkedList.Node tmp = newHead;
+        while (headA != null && headB != null) {
+            if(headA.data < headB.data) {
+                tmp.next = headA;
+                headA = headA.next;
+                tmp = tmp.next;
+            }else {
+                tmp.next = headB;
+                headB = headB.next;
+                tmp = tmp.next;
+            }
+        }
+        if(headA != null) {
+            tmp.next = headA;
+        }
+        if(headB != null) {
+            tmp.next = headB;
+        }
+        return newHead.next;
+    }
+

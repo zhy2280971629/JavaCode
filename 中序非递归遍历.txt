@@ -1,0 +1,17 @@
+public void inOrdernor(){
+        if(null == root){
+            return;
+        }
+        Stack<BTNode> s = new Stack<>();
+        BTNode cur = root;
+        while(null != cur || !s.empty()){
+            while(cur != null){
+                s.push(cur);
+                cur = cur.left;
+            }
+            cur = s.peek();
+            System.out.print(cur.val + " ");
+            s.pop();
+            cur = cur.right;
+        }
+    }

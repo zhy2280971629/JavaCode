@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class Test{
+	public static void main(String[] args){
+		Scanner input=new Scanner(System.in);
+		int count=2;
+		String password1="123";
+		System.out.println("请输入密码:");
+		while(count>=0){
+			String password=input.next();
+		   if(((password1).equals(password))==true){
+			   System.out.println("登录成功");break;}
+			   else if(count>0){
+				count--;
+			System.out.println("密码错误，请重新输入：");}	
+                    else{
+						System.out.println("退出程序");break;}
+		}	
+	}	
+}	

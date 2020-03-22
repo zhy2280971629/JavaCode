@@ -1,0 +1,31 @@
+给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。
+示例 :
+输入: [3, 2, 1]
+输出: 1
+public int thirdMax(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+        if(nums.length == 1){
+            return nums[0];
+        }
+        if(nums.length == 2){
+            return Math.max(nums[0],nums[1]);
+        }
+        long max = Long.MIN_VALUE;
+        long sec = Long.MIN_VALUE;
+        long third = Long.MIN_VALUE;
+        for(int i = 0;i < nums.length;i++){
+            if(nums[i] > max){
+                third = sec;
+                sec = max;
+                max = nums[i];
+            }else if(nums[i] > sec && nums[i] < max){
+                third = sec;
+                sec = nums[i];
+            }else if(nums[i] > third && nums[i] < sec){
+                third = nums[i];
+            }
+        }
+        return third == Long.MIN_VALUE ? (int)max : (int)third;
+    }

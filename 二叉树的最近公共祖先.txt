@@ -1,0 +1,124 @@
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+示例 1:
+
+输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+输出: 3
+解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
+（1）
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(null == root){
+            return root;
+        }
+        if(p == root || q == root){
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p , q);
+        TreeNode right = lowestCommonAncestor(root.right, p , q);
+        if(left != null && right != null){
+            return root;
+        }
+        return null == left ? right : left;
+    }
+（2）
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(null == root || null == p || null == q){
+            return null;
+        }
+        //获取p和q在root中的路径
+        Stack<TreeNode> pPath = new Stack<>();
+        Stack<TreeNode> qPath = new Stack<>();
+        getNodePath(root, p, pPath);
+        getNodePath(root, q, qPath);
+        //两个路径对应栈：1.应该让节点个数多的先出栈到元素个数相同
+                                      2.依次比较两个栈顶的元素
+                                      a.相等-->即最近的公共祖先
+                                      b.不相等-->出栈
+        int psize = pPath.size();
+        int qsize = qPath.size();
+
+        while(psize != 0 && qsize != 0){
+            if(psize > qsize){
+                pPath.pop();
+                psize--;
+            }else if(qsize > psize){
+                qPath.pop();
+                qsize--;
+            }else{
+                if(pPath.peek() != qPath.peek()){
+                    pPath.pop();
+                    qPath.pop();
+                }else{
+                    return pPath.peek();
+                }
+            }
+        }
+        return root;
+    }
+   //获取节点的路径
+    private boolean getNodePath(TreeNode root, TreeNode node, Stack<TreeNode> sPath){
+        if(null == root){
+            return false;
+        }
+        sPath.push(root);
+        if(node == root){
+            return true;
+        }
+        //递归到根的左子树或右子树找node路径
+        if(getNodePath(root.left, node, sPath) || getNodePath(root.right, node, sPath)){
+            return true;
+        }
+        sPath.pop();
+        return false;
+    }
+（3）
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || p == null || q == null){
+            return null;
+        }
+        //如果一个节点在根的位置，最近公共祖先一定是根节点
+        if(p == root || q == root){
+            return root;
+        }
+        //检测p和q在root子树中的情况
+        boolean pInLeft = false;
+        boolean pInRight = false;
+        boolean qInLeft = false;
+        boolean qInRight = false;
+        //检测p在root子树中的情况
+        if(isNodeInTree(root.left, p)){
+            pInLeft = true;
+        }else{
+            pInRight = true;
+        }
+        //检测q在root子树中的情况
+        if(isNodeInTree(root.left, q)){
+            qInLeft = true; 
+        }else{
+            qInRight = true;
+        }
+        //p和q分别在root的左右子树中
+        if((pInLeft && qInRight) || (pInRight && qInLeft)){
+            return root;
+        }
+        else if(pInLeft && qInLeft){
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        else{
+            return lowestCommonAncestor(root.right, p, q);
+        }
+    }
+    //检测一个节点是否在二叉树中
+    private boolean isNodeInTree(TreeNode root, TreeNode node){
+        if(root == null){
+            return false;
+        }
+        if(root == node){
+            return true;
+        }
+        if(isNodeInTree(root.left, node) || isNodeInTree(root.right, node)){
+            return true;
+        }
+        return false;
+    }

@@ -1,0 +1,24 @@
+public void preOrderTraversel(BTNode root){
+        if(null == root){
+            return;
+        }
+        Stack<BTNode> s = new Stack<>();
+        s.push(root);
+        while(!s.isEmpty()){
+            BTNode cur = s.peek();
+            System.out.print(cur.val + " ");
+            s.pop();
+
+
+            //如果cur有右子树，让右子树入队列
+            if(null != cur.right){
+                s.push(cur.right);
+            }
+
+            //如果cur有左子树，让左子树入队列
+            if(null != cur.left){
+                s.push(cur.left);
+            }
+        }
+        System.out.println();
+    }

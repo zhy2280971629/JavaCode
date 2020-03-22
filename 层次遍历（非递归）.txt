@@ -1,0 +1,22 @@
+public void levelOrder(){
+        if(null == root){
+            return;
+        }
+        Queue<BTNode> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            BTNode cur = q.poll();
+            System.out.print(cur.val + " ");
+
+            //如果cur有左子树，让左子树入队列
+            if(null != cur.left){
+                q.offer(cur.left);
+            }
+
+            //如果cur有右子树，让右子树入队列
+            if(null != cur.right){
+                q.offer(cur.right);
+            }
+        }
+        System.out.println();
+    }

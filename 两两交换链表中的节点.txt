@@ -1,0 +1,35 @@
+给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+示例:
+给定 1->2->3->4, 你应该返回 2->1->4->3.
+递归算法：
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode cur=head.next;
+        head.next=swapPairs(cur.next);
+        cur.next=head;
+        return cur;
+    }
+}
+非递归算法：
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode node=new ListNode(-1);
+        node.next=head;
+        ListNode tmp=node;
+        while(tmp.next!=null&&tmp.next.next!=null){
+            ListNode slow=tmp.next;
+            ListNode fast=tmp.next.next;
+            tmp.next=fast;
+            slow.next=fast.next;
+            fast.next=slow;
+            tmp=slow;
+        }
+        return node.next;
+    }
+}

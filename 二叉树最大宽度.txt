@@ -1,0 +1,48 @@
+给定一个二叉树，编写一个函数来获取这个树的最大宽度。树的宽度是所有层中的最大宽度。这个二叉树与满二叉树（full binary tree）结构相同，但一些节点为空。
+每一层的宽度被定义为两个端点（该层最左和最右的非空节点，两端点间的null节点也计入长度）之间的长度。
+
+示例 1:
+输入: 
+
+           1
+         /   \
+        3     2
+       / \     \  
+      5   3     9 
+
+输出: 4
+解释: 最大值出现在树的第 3 层，宽度为 4 (5,3,null,9)。
+
+class Solution {
+    private int maxWidth = 1;
+    public int widthOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        LinkedList<Integer> l = new LinkedList<>();
+        q.offer(root);
+        l.add(1);
+        int size = 1;
+        while(!q.isEmpty()){
+            TreeNode cur = q.poll();
+            size--;
+            int index = l.removeFirst();
+            if(null != cur.left){
+                q.offer(cur.left);
+                l.add(2 * index);
+            }
+            if(null != cur.right){
+                q.offer(cur.right);
+                l.add(2 * index + 1);
+            }
+            if(size == 0){
+                if(l.size() >= 2){
+                    maxWidth = Math.max(maxWidth, l.getLast() - l.getFirst() + 1);   
+                }
+                size = q.size();
+            }
+        }
+        return maxWidth;
+    }
+}

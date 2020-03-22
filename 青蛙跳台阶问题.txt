@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class Test{
+    public static int frogJump(int n){
+        if(n==1){
+            return 1;
+        }
+        if(n==2){
+            return 2;
+        }
+        else{
+           return frogJump(n-1)+frogJump(n-2);
+        }
+    }
+    public static void main(String[] args){
+        System.out.println("请输入台阶数：");
+        Scanner scan=new Scanner(System.in);
+        int num=scan.nextInt();
+        System.out.println(frogJump(num));
+        }
+}

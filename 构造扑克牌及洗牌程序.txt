@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+class card{
+    private String suit;
+    private int rank;
+    card(String suit,int rank){
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+    @Override
+    public String toString() {
+        String num = String.format("%d",rank);
+        switch(rank){
+            case 11:
+                num = "J";
+                break;
+            case 12:
+                num = "Q";
+                break;
+            case 13:
+                num = "K";
+                break;
+        }
+        return suit + ":" + num;
+    }
+}
+class cardDeam{
+    //构造一副扑克牌
+    String color[] = {"♥","♠","♣","♦"};
+
+    public List<card> poker(){
+        List<card> cards = new ArrayList<>();
+        for(int i = 0;i < 4;i++){
+            for(int j = 1;j <= 13;j++){
+                card card = new card(color[i],j);
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+    //洗牌算法
+    public void shufleCards(List<card> cards){
+        //从后往前依次取牌i
+        for(int i = cards.size() - 1;i > 0;i--){
+            //设置随机种子，一般获取系统当前时间
+            Random a = new Random(20191226);
+            //从[0,i)随机取一张扑克牌j
+            int j = a.nextInt(i);
+            //将i和j位置上的牌进行交换
+            swap(cards,i,j);
+        }
+    }
+    //交换两张扑克牌的位置
+    private void swap(List<card> cards,int i,int j){
+        card temp = cards.get(i);
+        cards.set(i,cards.get(j));
+        cards.set(j,temp);
+    }
+}
+public class Test20191226 {
+    public static void main(String[] args) {
+        cardDeam newcard = new cardDeam();
+        List<card> cards = newcard.poker();
+        System.out.println(cards);
+
+        newcard.shufleCards(cards);
+        System.out.println(cards);
+    }
+}

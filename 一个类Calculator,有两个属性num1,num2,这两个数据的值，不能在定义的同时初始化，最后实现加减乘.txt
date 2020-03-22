@@ -1,0 +1,30 @@
+class Calculator {
+    public int num1;
+    public int num2;
+    public  Calculator() {
+    }
+    public void add() {
+        System.out.println(num1 + "+" + num2 + "=" + (num1 + num2));
+    }
+
+    public void sub() {
+        System.out.println(num1 + "-" + num2 + "=" + (num1 - num2));
+    }
+
+    public void mul() {
+        System.out.println(num1 + "*" + num2 + "=" + (num1 * num2));
+    }
+
+    public void div() {
+        System.out.println(num1 + "/" + num2 + "=" + (num1 / num2));
+    }
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        calculator.num1=12;
+        calculator.num2=4;
+        calculator.add();
+        calculator.sub();
+        calculator.mul();
+        calculator.div();
+    }
+}

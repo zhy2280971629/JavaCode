@@ -1,0 +1,21 @@
+class Calculator {
+    public int num1;
+    public int num2;
+    public  Calculator() {
+        this.num1=num1;
+        this.num2=num2;
+    }
+    public void swap() {
+        int temp=num1;
+        num1=num2;
+        num2=temp;
+        System.out.println("num1="+num1+",num2="+num2);
+    }
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        calculator.num1=12;
+        calculator.num2=4;
+        System.out.println("num1="+calculator.num1+",num2="+calculator.num2);
+        calculator.swap();
+    }
+}

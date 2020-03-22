@@ -1,0 +1,51 @@
+public class Day {
+    int year;
+    int month;
+    int day;
+    public Day(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+    public int today(Day day) {
+        int[] array = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int total = 0;
+        if (day.year % 4 == 0 && day.year % 100 != 0 || day.year % 400 == 0) {
+            array[1] = 29;
+        }
+        switch (day.month) {
+            case 12:
+                total = total + array[10];
+            case 11:
+                total = total + array[9];
+            case 10:
+                total = total + array[8];
+            case 9:
+                total = total + array[7];
+            case 8:
+                total = total + array[6];
+            case 7:
+                total = total + array[5];
+            case 6:
+                total = total + array[4];
+            case 5:
+                total = total + array[3];
+            case 4:
+                total = total + array[2];
+            case 3:
+                total = total + array[1];
+            case 2:
+                total = total + array[0];
+            case 1:
+                total = total + day.day;
+            default:
+                break;
+        }
+        return total;
+    }
+    public static void main(String[] args) {
+        Day day = new Day(2019,2,26);
+        int today = day.today(day);
+        System.out.println(today);
+    }
+}

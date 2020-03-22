@@ -1,0 +1,38 @@
+不借用任何字符串库函数实现无冗余地接受两个字符串，然后把它们无冗余的连接起来。
+输入描述:
+每一行包括两个字符串，长度不超过100。
+示例1：
+输入
+abc def
+输出
+abcdef
+1.import java.util.Scanner;
+public class Main{
+    public static String func(String str){
+        String[] result=str.split(" ");
+        return result[0].concat(result[1]);
+    }
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        String str=input.nextLine();
+        String ret=func(str);
+        System.out.println(ret);
+    }
+}
+2.import java.util.Scanner;
+public class Main{
+    public static String func(String str){
+        String[] strs=str.split(" ");
+        String ret="";
+        for(String s:strs){
+            ret+=s;
+        }
+        return ret;
+    }
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        String str=input.nextLine();
+        String ret=func(str);
+        System.out.println(ret);
+    }
+}

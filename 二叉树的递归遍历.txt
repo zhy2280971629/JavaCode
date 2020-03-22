@@ -1,0 +1,37 @@
+class BTNode{
+    int val;//数据域
+    BTNode left = null;//指向根的左子树
+    BTNode right = null;//指向根的右子树
+    public BTNode(int val){
+        this.val = val;
+    }
+}
+public class binTree {
+    private BTNode root = null;//引用二叉树的根节点
+
+    //前序遍历
+    public void preOrder(BTNode root){
+        if(null != root){
+            System.out.println(root.val + " ");
+            preOrder(root.left);
+            preOrder(root.right);
+    }
+
+    //中序遍历
+    public void inOrder(BTNode root){
+        if(null != root){
+            inOrder(root.left);
+            System.out.println(root.val + " ");
+            inOrder(root.right);
+        }
+    }
+
+    //后序遍历
+    public void postOrder(BTNode){
+        if(null != root){
+            postOrder(root.left);
+            postOrder(root.right);
+            System.out.println(root.val + " ");
+        }
+    }
+}

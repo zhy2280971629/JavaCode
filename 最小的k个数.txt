@@ -1,0 +1,23 @@
+设计一个算法，找出数组中最小的k个数。以任意顺序返回这k个数均可。
+
+示例：
+输入： arr = [1,3,5,7,2,4,6,8], k = 4
+输出： [1,2,3,4]
+
+public int[] smallestK(int[] arr, int k) {
+        if(k <= 0){
+            return new int[0];
+        }
+        //将arr中的数据放到优先级队列中
+        PriorityQueue<Integer> p = new PriorityQueue<>(arr.length);
+        for(int i = 0;i < arr.length;i++){
+            p.offer(arr[i]);
+        }
+        //依次去取优先级队列中前k个数
+        int[] ret = new int[k];
+        for(int i = 0;i < k;i++){
+            ret[i] = p.peek();
+            p.poll();
+        }
+        return ret;
+    }

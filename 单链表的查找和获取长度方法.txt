@@ -1,0 +1,21 @@
+   //查找是否包含关键字key是否在单链表当中
+   public boolean contains(int key){
+        ListNode cur=this.head;
+        while(cur!=null){
+            if(cur.data==key){
+                return true;
+            }
+            cur=cur.next;
+        }
+        return false;
+    }
+    //得到单链表的长度
+    public int getLength(){
+        int count=0;
+        ListNode cur=this.head;
+        while(cur.next!=null){
+            count++;
+            cur=cur.next;
+        }
+        return count;
+    }

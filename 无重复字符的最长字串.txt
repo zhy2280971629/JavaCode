@@ -1,0 +1,24 @@
+给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+示例 1:
+输入: "abcabcbb"
+输出: 3 
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s == null||s.length()<=0||s == " "){
+            return 0;
+        }
+        char[] str = s.toCharArray();
+        int maxLength = 0;
+        int leftIndex = 0;
+        for(int j=0;j < str.length;j++){
+            for(int childIndex = leftIndex;childIndex < j;childIndex++){
+                if(str[childIndex] == str[j]){
+                    maxLength = Math.max(maxLength,j - leftIndex);
+                    leftIndex = childIndex + 1;
+                    break;
+                }
+            }
+        }
+        return Math.max(str.length - leftIndex,maxLength);
+    }
+}

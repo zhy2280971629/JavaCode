@@ -1,0 +1,10 @@
+private ListNode searchPrev(int key) {
+       ListNode pre=this.head;
+       while(pre.next!=null){
+           if(pre.next.data==key){
+               return pre;
+           }
+           pre=pre.next;
+       }
+       return null;
+    }

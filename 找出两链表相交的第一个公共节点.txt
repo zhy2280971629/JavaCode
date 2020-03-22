@@ -1,0 +1,51 @@
+输入两个链表，找出它们的第一个公共结点。
+public static ListNode getIntersectionNode
+            (ListNode headA,ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        //永远指向最长的单链表
+        ListNode pL = headA;
+        int lenA = 0;
+        //永远指向最短的单链表
+        ListNode pS = headB;
+        int lenB = 0;
+        while (pL != null) {
+            lenA++;
+            pL = pL.next;
+        }
+        while (pS != null) {
+            lenB++;
+            pS = pS.next;
+        }
+        pL = headA;
+        pS = headB;
+        //分别求长度
+        //求长度的差值
+        int len = lenA - lenB;
+        //如果是负数-》pL = headB;  pS = headA
+        if (len < 0) {
+            pL = headB;
+            pS = headA;
+            len = lenB - lenA;
+        }
+        //只需要让pL走len步就好了
+        while (len > 0) {
+            len--;
+            pL = pL.next;
+        }
+
+        while (pL != pS && pL != null) {
+            pL = pL.next;
+            pS = pS.next;
+        }
+        if (pL == pS && pS != null) {
+            return pL;
+        }
+        //万一没有相交，并且两个单链表长度一样
+        //防止最后一个节点
+
+        //走完len步之后  两个同时开始走
+        //一直走 走到next值相同时 就是交点
+        return null;
+    }

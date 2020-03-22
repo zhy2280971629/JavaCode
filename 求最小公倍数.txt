@@ -1,0 +1,29 @@
+import java.util.Scanner;
+public class Biggys {
+    //最大公约数
+    public static int bigGYS(int a,int b){
+        int temp;
+        while(b!=0){
+            temp=a%b;
+            a=b;
+            b=temp;
+        }
+        return a;
+    }
+    //最小公倍数
+    public static int smlGYS(int a,int b){
+        return a*b/bigGYS(a,b);
+    }
+
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int num1=scan.nextInt();
+        int num2=scan.nextInt();
+        if(num1<num2){
+            int temp=num1;
+            num1=num2;
+            num2=temp;
+        }
+        System.out.println("最小公倍数为："+smlGYS(num1,num2));
+    }
+}

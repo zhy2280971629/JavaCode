@@ -1,0 +1,47 @@
+（1）import java.util.Scanner;
+public class Test{
+    public static int fac(int n){
+        if(n==1){
+            return 1;
+        }
+        else{
+           return n*fac(n-1);
+        }
+    }
+    public static void main(String[] args){
+        System.out.println("请输入一个整数：");
+        Scanner scan=new Scanner(System.in);
+        int num=scan.nextInt();
+        int i=0;
+        int sum=0;
+        for(i=1;i<=num;i++){
+            sum+=fac(i);
+        }
+        System.out.println(num+"!相加="+sum);
+        }
+}
+（2）import java.util.Scanner;
+
+public class Test1 {
+    public static int fac(int n){
+        int ret = 1;
+        for(int i = 1;i <= n;i++){
+            ret *= i;
+        }
+        return ret;
+    }
+    public static int facSum(int n){
+        int sum = 0;
+        for(int i = 1;i <= n;i++){
+            sum += fac(i);
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int num = scan.nextInt();
+        int ret = facSum(num);
+        System.out.println(ret);
+    }
+}
+

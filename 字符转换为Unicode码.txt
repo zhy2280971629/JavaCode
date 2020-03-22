@@ -1,0 +1,9 @@
+protected void do_codeButton_actionPerformed(ActionEvent e){
+        String text = charInputField_getText();
+        char[] charArray = text.toCharArray();
+        StringBuilder builder = new StringBuilder();
+        for(char c : charArray){
+            builder.append(int)c + " ");
+        }
+        codeOutputField.setText(builder.toString());
+    }

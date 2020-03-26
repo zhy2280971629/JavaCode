@@ -1,0 +1,16 @@
+public static void shellSort(int[] array){
+        int gap = array.length;
+        while(gap > 1){
+            gap = gap/3 + 1;
+            for(int i = gap; i < array.length; i++){
+                int end = i - gap;
+                int key = array[i];
+                while(end >= 0 && key < array[end]){
+                    array[end+gap] = array[end];
+                    end -= gap;
+                }
+                array[end+gap] = key;
+            }
+            gap--;
+        }
+    }

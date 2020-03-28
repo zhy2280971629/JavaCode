@@ -1,0 +1,56 @@
+题目描述
+编一个程序，读入用户输入的一串先序遍历字符串，根据此字符串建立一个二叉树（以指针方式存储）。 例如如下的先序遍历字符串： ABC##DE#G##F### 其中“#”表示的是空格，空格字符代表空树。建立起此二叉树以后，再对二叉树进行中序遍历，输出遍历结果。
+输入描述:
+输入包括1行字符串，长度不超过100。
+输出描述:
+可能有多组测试数据，对于每组数据，
+输出将输入字符串建立二叉树后中序遍历的序列，每个字符后面都有一个空格。
+每个输出结果占一行。
+import java.util.Scanner;
+class BTNode{
+    char val;//数据域
+    BTNode left = null;//指向根的左子树
+    BTNode right = null;//指向根的右子树
+    public BTNode(char val){
+        this.val = val;
+    }
+}
+class BTree{
+    BTNode root = null;//引用二叉树的根节点
+    int index;
+    BTree(String s,char invalid){
+        root = createBinTree(s,invalid);
+    }
+    private BTNode createBinTree(String s,char invalid){
+        BTNode newRoot = null;
+        if(index < s.length() && s.charAt(index) != invalid){
+            newRoot = new BTNode(s.charAt(index));
+            ++index;
+            newRoot.left = createBinTree(s,invalid);
+            ++index;
+            newRoot.right = createBinTree(s,invalid);
+        }
+        return newRoot;
+    }
+    public void inOrder(){
+        inOrder(root);
+        System.out.println();
+    }
+    private void inOrder(BTNode root){
+        if(null != root){
+            inOrder(root.left);
+            System.out.print(root.val + " ");
+            inOrder(root.right);
+        }
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNextLine()){
+            String s = sc.nextLine();
+            BTree t = new BTree(s,'#');
+            t.inOrder();
+        }
+    }
+}

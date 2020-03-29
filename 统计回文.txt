@@ -1,0 +1,19 @@
+有两个回文串a和b，如果要让b插入a中之后产生的是回文串，有多少个插入方法
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String a = sc.nextLine();
+            String b = sc.nextLine();
+            int ret = 0;
+            for(int i = 0;i <= a.length();i++){
+              String str = a.substring(0, i) + b +a.substring(i, a.length());
+              StringBuffer s = new StringBuffer(str);
+              if(s.reverse().toString().equals(str)){
+                  ++ret;
+               }
+            }
+            System.out.println(ret);
+        }
+    }
+}

@@ -1,0 +1,36 @@
+private static void swap(int[]array,int parent,int child){
+        int temp = array[parent];
+        array[parent] = array[child];
+        array[child] = temp;
+    }
+public static void selectSortOP(int[] array){
+        int begin = 0;
+        int end = array.length - 1;
+        while(begin < end){
+            int maxPos = begin;
+            int minPos = begin;
+            int index = begin + 1;
+            while(index <= end){
+                if(array[index] > array[maxPos]){
+                    maxPos = index;
+                }
+                if(array[index] < array[minPos]){
+                    minPos = index;
+                }
+                ++index;
+            }
+            //将最大元素放在区间最后一个位置
+            if(maxPos != end){
+                swap(array, maxPos, end);
+            }
+            //如果最小元素刚好在区间最后一个位置，必须要更新minPos
+            if(minPos == end){
+                minPos = maxPos;
+            }
+            if(minPos != begin){
+                swap(array,minPos,begin);
+            }
+            begin++;
+            end--;
+        }
+    }

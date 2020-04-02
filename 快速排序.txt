@@ -54,6 +54,6 @@ public static void quickSort(int[]array,int left,int right){
             int div = partion3(array,left,right);
             //快排基准值的左侧
             quickSort(array,left,div);
-            quickSort(array,div,right);
+            quickSort(array,div+1,right);
         }
     }

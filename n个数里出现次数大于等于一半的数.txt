@@ -1,0 +1,42 @@
+a题目描述
+输入n个整数，输出出现次数大于等于数组长度-半的数。
+输入描述:
+每个测试输入包含n个空格分割的n个整数，n不超过100，其中有一个整数
+出现次数大于等于n/2。
+输出描述:
+输出出现次数大于等于n/2的数。
+示例1
+输入
+3 9 3 2 5 6 7 3 2 3 3 3
+输出
+3
+import java.util.*;
+public class Main{
+    public static int count(int[] arr)
+    {
+        int len = arr.length/2;
+        int count = 1;
+        Arrays.sort(arr);
+        for(int i = 0;i < arr.length;i++){
+            if(arr[i] == arr[len-1]){
+                count++;
+            }
+        }
+        if(count >= len){
+            return arr[len-1];
+        }
+        return -1;
+    }
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] strArr = str.split(" ");
+        int[] arr = new int[strArr.length];
+        for(int i = 0;i < arr.length;i++){
+            arr[i] = Integer.parseInt(strArr[i]);
+        }
+        int ret = count(arr);
+        System.out.println(ret);
+    }
+}

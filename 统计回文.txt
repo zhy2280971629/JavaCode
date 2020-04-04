@@ -1,5 +1,5 @@
 有两个回文串a和b，如果要让b插入a中之后产生的是回文串，有多少个插入方法
-public class Main{
+（1）public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
@@ -15,5 +15,33 @@ public class Main{
             }
             System.out.println(ret);
         }
+    }
+}
+（2）public class Main{
+    public static boolean isCylinder(String str){
+        int i = 0;
+        int j = str.length() - 1;
+        while(i < j){
+            if(str.charAt(i) != str.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String str1 = sc.nextLine();
+        String str2 = sc.nextLine();
+        int count = 0;
+        for(int i = 0;i <= str1.length();i++){
+            StringBuilder sb = new StringBuilder(str1);
+            sb.insert(i, str2);
+            if(isCylinder(sb.toString())){
+                count++;
+            }
+        }
+        System.out.println(count);
     }
 }

@@ -1,0 +1,35 @@
+■题目描述
+找出n个数里最小的k个
+输入描述:
+每个测试输入包含空格分割的n+1个整数，最后一个整数为k值, n
+不超过100。
+输出描述:
+输出n个整数里最小的k个数。升序输出
+示例1输入输出示例仅供调试， 后台判题数据一般不包含示例
+输入
+3 9 6 8 -10 7 -11 19 30 12 23 5
+输出
+-11 -10 3 6 7
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> list = new ArrayList<>();
+        String s = sc.nextLine();
+        String[] sch = s.split(" ");
+        int[] arr = new int[sch.length-1];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = Integer.parseInt(sch[i]);
+            list.add(arr[i]);
+        }
+        int k = Integer.parseInt(sch[sch.length-1]);
+        PriorityQueue<Integer> q = new PriorityQueue<>(list);
+        while(k > 0){
+            System.out.print(q.peek() + " ");
+            q.poll();
+            k--;
+        }
+    }
+}
+
+

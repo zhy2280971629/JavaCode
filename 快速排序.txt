@@ -20,6 +20,7 @@ public static int partion1(int[]array,int left,int right){
         }
         return begin;
     }
+  
 public static int partion2(int[]array,int left,int right){
         int begin = left;
         int end = right - 1;
@@ -48,6 +49,22 @@ public static int partion2(int[]array,int left,int right){
         array[begin] = key;
         return begin;
     }
+    public static int partion3(int[] array,int left,int right){
+        int cur = left;
+        int prev = cur - 1;
+        int key = array[right-1];
+        while(cur < right){
+            if(array[cur] < key && ++prev != cur){
+                swap(array, cur, prev);
+            }
+            ++cur;
+        }
+        if(++prev != right - 1){
+            swap(array, prev,right-1);
+        }
+        return prev;
+    }
+    //递归
 public static void quickSort(int[]array,int left,int right){
         if(right - left > 1){
             //说明区间至少有两个元素
@@ -55,5 +72,23 @@ public static void quickSort(int[]array,int left,int right){
             //快排基准值的左侧
             quickSort(array,left,div);
             quickSort(array,div+1,right);
+        }
+    }
+    //非递归
+    public static void quickSortNor(int[] array){
+        Stack<Integer> s = new Stack<>();
+        s.push(array.length);
+        s.push(0);
+        while(!s.isEmpty()){
+            int left = s.pop();
+            int right = s.pop();
+
+            if(right - left > 1){
+                int div = partion1(array, left, right);
+                s.push(right);
+                s.push(div+1);
+                s.push(div);
+                s.push(left);
+            }
         }
     }

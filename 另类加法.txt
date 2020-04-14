@@ -1,0 +1,17 @@
+■题目描述
+请编写-一个函数，将两个数字相加。不得使用+或其他算数运算符。
+给定两个int A和B。请返回A + B的值
+测试样例:
+1,2
+返回: 3
+public int addAB(int A, int B) {
+        int xor = 0;
+        int cf = 0;
+        while(B != 0){
+            xor = A ^ B;
+            cf = (A & B) << 1;
+            A = xor;
+            B = cf;
+        }
+        return A;
+    }

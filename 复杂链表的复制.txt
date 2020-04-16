@@ -1,4 +1,4 @@
-class Solution{
+（1）
     public Node copyRandomList(Node head){
         if(head==null){
             return null;
@@ -32,4 +32,22 @@ class Solution{
             return newHead;
         }
     }
-}
+（2）
+public Node copyRandomList(Node head) {
+        if(null == head){
+            return null;
+        }
+        Map<Node, Node> m = new HashMap<>();
+        Node node = head;
+        while(node != null){
+            m.put(node, new Node(node.val));
+            node = node.next;
+        }
+        node = head;
+        while(node != null){
+            m.get(node).next = m.get(node.next);
+            m.get(node).random = m.get(node.random);
+            node = node.next;
+        }
+        return m.get(head);
+    }

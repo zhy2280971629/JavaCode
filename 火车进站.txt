@@ -1,0 +1,70 @@
+■题目描述
+给定-个正整数N代表火车数量，0<N<10, 接下来输入火车入站的序列，一共N
+辆火车，每辆火车以数字1-9编号。要求以字典序排序输出火车出站的序列号。
+输入描述:
+有多组测试用例，每一组第一行输入一个正整数N (0<N<10) ，第二行包括N
+个正整数，范围为1到9。
+输出描述:
+输出以字典序从小到大排序的火车出站序列号，每个编号以空格隔开，每个
+输出序列换行，具体见sample。
+示例1
+输入
+3
+123
+输出
+123
+132
+213
+231
+321
+public class StackPopArray {
+
+    public static void main(String []args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for(int i = 0;i < arr.length; i++) {
+                arr[i] = sc.nextInt();
+            }
+            int[] pop = arr.clone();
+            allArrayList(arr, 0, pop);
+        }
+    }
+    static boolean isPopStack(int push[],int pop[]){
+        Stack<Integer> stack=new Stack<Integer>();
+        int k=0;
+        for(int i=0;i<pop.length;i++){
+            stack.push(push[i]);
+            while(!stack.empty()&&stack.peek()==pop[k]){
+                stack.pop();
+                k++;
+            }
+        }
+        return stack.empty();
+    }
+    static void allArrayList(int[] array,int start,int push[]){
+        if(start==array.length){
+            if(isPopStack(push,array)){
+                for(int i = 0; i < array.length; i++){
+                    System.out.print(array[i] + " ");
+                }
+                System.out.println();
+            }
+
+        }
+        else{
+            for(int i=start;i<array.length;++i){
+                exchange(array,start,i);  //  交换元素
+                allArrayList(array,start+1,push);  //交换后，再进行全排列算法
+                exchange(array,start,i);  //还原成原来的数组，便于下一次的全排列
+            }
+        }
+    }
+    static void exchange(int[] array,int s,int i){
+        int t=array[s];
+        array[s]=array[i];
+        array[i]=t;
+    }
+}
+

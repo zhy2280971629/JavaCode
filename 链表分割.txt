@@ -1,0 +1,54 @@
+■题目描述
+编写代码，以给定值x为基准将链表分割成两部分，所有小于x的结点排在大
+于或等于x的结点之前
+给定一个链表的头指针ListNode* pHead,请返回重新排列后的链表的头指
+针。注意:分割以后保持原来的数据顺序不变。
+import java.util.*;
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        ListNode cur = pHead;
+        ListNode bs = null;
+        ListNode be = null;
+        ListNode as = null;
+        ListNode ae = null;
+        while(cur != null){
+            if(cur.val < x){
+                //第一次插入
+                if(bs == null){
+                    bs = cur;
+                    be = cur;
+                }else{
+                    be.next = cur;
+                    be = be.next;
+                }
+            }else{
+                if(as == null){
+                    as = cur;
+                    ae = cur;
+                }else{
+                    ae.next = cur;
+                    ae = ae.next;
+                }
+            }
+            cur = cur.next;
+        }
+        if(bs == null){
+            return as;
+        }
+        be.next = as;
+        if(as != null){
+            ae.next = null;
+        }
+        return bs;
+    }
+}

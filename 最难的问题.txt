@@ -1,0 +1,53 @@
+■题目描述
+NowCoder生活在充满危险和阴谋的年代。为了生存，他首次发明了密
+码，用于军队的消息传递。假设你是军团中的一名军官，需要把发送来的
+消息破译出来、并提
+供给你的将军。
+消息加密的办法是:对消息原文中的每个字母，分别用该字母之后的第5 ;
+个字母替换(例如: 消息原文中的每个字母A都分别替换成字母F)，其
+他字符不变，且消息原文的所有字母都是大写的。密码中的字母与原文
+中的字母对应关系如下。
+密码字母: ABCDE F GHIJKLMNOPQR S T∪V WXY Z
+原文字母: V W XY ZABCDEF GHIJKLM NOPQRST U
+输入描述:
+输入包括多组数据，每组数据- -行，为收到的密文。
+密文仅有空格和大写字母组成。
+输出描述:
+对应每一组数据，输出解密后的明文。
+示例1
+输入
+HELLO WORLD
+SNHJ
+输出
+CZGGJ RJMGY
+NICE
+import java.util.*;
+
+public class Main{
+    public static String encryptMessage(String message){
+        int len = message.length();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < len; i++){
+            char ch = message.charAt(i);
+            if(ch == ' '){
+                sb.append(ch);
+                continue;
+            }
+            if(ch - 'A' < 5){
+                ch += 21;
+            }
+            else{
+                ch -= 5;
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String str = sc.nextLine();
+            System.out.println(encryptMessage(str));
+        }
+    }
+}

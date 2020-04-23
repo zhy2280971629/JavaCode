@@ -1,0 +1,74 @@
+■题目描述
+给定一系列正整数，请按要求对数字进行分类，并输出以下5个数字:
+A1 =能被5整除的数字中所有偶数的和;
+A2 =将被5除后余1的数字按给出顺序进行交错求和，即计算n1-n2+n3-
+n4...;
+A3 =被5除后余2的数字的个数;
+A4 =被5除后余3的数字的平均数，精确到小数点后1位;
+A5 =被5除后余4的数字中最大数字。
+输入描述:
+每个输入包含1个测试用例。每个测试用例先给出--个不超过1000的正
+整数N，随后给出N个不超过1000的待分类的正整数。数字间以空格分
+隔。
+输出描述:
+对给定的N个正整数，按题目要求计算A1~A5并在- .行中顺序输出。数
+字间以空格分隔，但行末不得有多余空格。
+若其中某一类数字不存在，则在相应位置输出“N”。
+示例1输入输出示例仅供调试， 后台判题数据一般不包含示例
+输入
+复制
+13 1 2 3 4 5 6 7 8 9 10 20 16 18
+输出
+复制
+301129.79
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+        int ret[] = new int[5];
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        int count = 0;
+        int count1 = 0;
+        for(int i = 0; i < n; i++){
+            arr[i] = sc.nextInt();
+            if(arr[i] % 10 == 0){
+                 ret[0] += arr[i];
+            }
+            if(arr[i] % 5 == 1){
+                 ret[1] += arr[i] * Math.pow(-1, count);
+                 count++;
+                }
+            if(arr[i] % 5 == 2){
+                 ret[2]++;
+                }
+            if(arr[i] % 5 == 3){
+                  ret[3] += arr[i];
+                  count1++;
+                }
+             if(arr[i] % 5 == 4){
+                  if(ret[4] < arr[i]){
+                       ret[4] = arr[i];
+                  }
+             }
+          }
+            String str = String.format("%.1f", (float)ret[3]/(float)count1);
+            for(int i = 0; i < 4; i++){
+                if(ret[i] == 0){
+                    sb.append("N ");
+                }
+                else{
+                    if(i == 3){
+                        sb.append(str + " ");
+                    }
+                    else{
+                        sb.append(ret[i] + " ");
+                    }
+                }
+            }
+        sb.append(ret[4]);
+        System.out.println(sb.toString());
+    }
+}

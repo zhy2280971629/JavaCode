@@ -1,0 +1,60 @@
+■题目描述
+原理: ip地址的每段可以看成是- -个0-255的整数，把每段拆分成一个二进
+制形式组合起来，然后把这个二进制数转变成
+一个长整数。
+举例:一个ip地址为10.0.3.193
+每段数字
+相对应的二进制数
+10
+00001010
+0
+00000000
+3
+00000011
+193
+11 000001
+组合起来即为: 00001010 00000000 00000011 11000001，转换为10进制
+数就是: 167773121, 即该IP地址转换后的数字就是它了。
+的每段可以看成是一-个0-255的整数，需要对IP地址进行校验
+输入描述:
+输入
+1  输入IP地址
+2  输入10进制型的IP地址
+输出描述:
+输出
+1  输出转换成10进制的IP地址
+2  输出转换后的IP地址
+示例1
+输入
+10.0.3.193
+167969729
+import java.util.*;
+
+public class Main{
+    public static long ipToInt(String sip){
+        String[] temp = sip.split("\\.");
+        return Long.valueOf(temp[0]) << 24 
+            | Long.valueOf(temp[1]) << 16 
+            | Long.valueOf(temp[2]) << 8
+            | Long.valueOf(temp[3]);
+    }
+    
+    public static String intToIp(long ip){
+        StringBuilder sb = new StringBuilder();
+        sb.append((ip >> 24) & 0xFF).append(".");
+        sb.append((ip >> 16) & 0xFF).append(".");
+        sb.append((ip >> 8) & 0xFF).append(".");
+        sb.append(ip & 0xFF);
+        return sb.toString();
+    }
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String sip = sc.next();
+            long ip = sc.nextInt();
+            System.out.println(ipToInt(sip));
+            System.out.println(intToIp(ip));
+        }
+    }
+}

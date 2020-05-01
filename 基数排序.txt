@@ -1,0 +1,31 @@
+public static void radixSort(int[] array){
+        //1.获取最高位数
+        int maxValue = array[0];
+        for(int i = 0; i < array.length; i++){
+            if(maxValue < array[i]){
+                maxValue = array[i];
+            }
+        }
+        int length = 1;
+        while(maxValue != 0){
+            maxValue /= 10;
+            length++;
+        }
+        int mod = 10;
+        int dev = 1;
+        for(int i = 0; i < length; i++){
+            int[][] count = new int[mod * 2][0];
+            for(int j = 0; j < array.length; j++){
+                int bucket = ((array[j] % mod) / dev) + mod;
+                count[bucket] = arrayAppend(count[bucket], array[j]);
+            }
+            int pos = 0;
+            for(int[] bucket : count){
+                for(int value : bucket){
+                    array[pos++] = value;
+                }
+            }
+            dev *= 10;
+            mod *= 10;
+        }
+    }

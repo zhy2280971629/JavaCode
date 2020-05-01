@@ -1,0 +1,28 @@
+    public static void countSort(int[] array){
+        //1.统计元素的范围
+        int minValue = array[0];
+        int maxValue = array[0];
+        for(int i = 0; i < array.length; i++){
+            if(array[i] < minValue){
+                minValue = array[i];
+            }
+            if(array[i] > maxValue){
+                maxValue = array[i];
+            }
+        }
+        //2.开辟计数的空间
+        //该范围中最多包含元素种类的个数
+        int range = maxValue - minValue + 1;
+        int[] count = new int[range];
+        //3.统计元素的个数
+        for(int i = 0; i < array.length; i++){
+            count[array[i] - minValue]++;
+        }
+        //4.对元素进行回收--排序
+        int index = 0;
+        for(int i = 0; i < range; i++){
+            while(count[i]-- != 0){
+                array[index++] = i + minValue;
+            }
+        }
+    }

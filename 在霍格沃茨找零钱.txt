@@ -1,0 +1,31 @@
+题目描述
+如果你是哈利波特迷，你会知道魔法世界有它自己的货币系统-一 就如海格告诉哈利的:“十七个银西可(Sickle)兑一 个加隆(Galleon), 二
+十九个纳特(Knut)兑一个西可，很容易。"现在，给定哈利应付的价钱P和他实付的钱A，你的任务是写一个程序来计算他应该被找的零钱。
+输入描述:
+输入在1行中分别给出P和A，格式为"Galleon.sickle. Knut"，其间用1个空格分隔。这里Galleon是[0，10711区间内的整 数，sickle是[0,17)区间内的整数，Knut是[0， 29)区间内的整数。
+输出描述:
+在一行中用与输入同样的格式输出哈利应该被找的零钱。如果他没带够钱，那么输出的应该是负数。
+示例1
+输入
+10.16.27 14.1.28
+输出
+3.2.1
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String[] P = sc.next().split("\\.");
+            String[] A = sc.next().split("\\.");
+            int PKnut = (Integer.parseInt(P[0])*17 + Integer.parseInt(P[1]))*29 + Integer.parseInt(P[2]);
+            int AKnut = (Integer.parseInt(A[0])*17 + Integer.parseInt(A[1]))*29 + Integer.parseInt(A[2]);
+            int ret = AKnut - PKnut;
+            int Knut = ret % 29;
+            int Sickle = ret / 29 % 17;
+            int Galleon = ret / 29 / 17;
+            System.out.println(Galleon + "." + Math.abs(Sickle) + "." + Math.abs(Knut));
+        }
+        sc.close();
+    }
+}

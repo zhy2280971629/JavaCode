@@ -1,0 +1,159 @@
+题目描述
+大家应该都会玩“锤子剪刀布”的游戏:现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出双方分别出什么手势的胜算最大。
+输入描述:
+输入第1行给出正整数N (<=105) ，即双方交锋的次数。随后N行，每行给出一.次交锋的信息，即甲、乙双方同时给出的的手势。c代表“锤子”、J代表“剪刀”、B代表“布”，第1个字母代表甲方，第2个代表乙方，中间有1个空格。
+输出描述:
+输出第1、2行分别给出甲、乙的胜、平、负次数，数字间以1个空格分隔。第3行给出两个字母，分别代表甲、乙获胜次数最多的手势，中间有1个空格。如果解不唯一，则输出按字母序最小的解。
+示例1
+输入
+10
+C J
+J B
+C B
+B B
+B C
+C C
+C B
+J B
+B C
+J J
+输出
+5 3 2
+2 3 5
+B B
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main {
+    //用来记录甲胜利的次数
+    private static int FIRST = 0;
+    //记录平局的次数
+    private static int DRAW = 0;
+    //用来表示所出的手势
+    private static char[] CHARS = new char[] {'C', 'J', 'B'};
+    //用来记录甲胜利的手势和手势所对应的次数
+    private static Map<Character, Integer> MAP_FIRST = new HashMap<>(16);
+    //用来记录乙胜利的手势和手势所对应的次数
+    private static Map<Character, Integer> MAP_SECOND = new HashMap<>(16);
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        //双方交锋次数
+        int num = Integer.parseInt(sc.nextLine());
+        //双方交锋的手势情况
+        String[] str = new String[num];
+        for (int i = 0; i < str.length; i++) {
+            str[i] = sc.nextLine();
+        }
+        // 遍历双方交锋的手势情况
+        for (int k = 0; k < str.length; k++) {
+            String s = str[k];
+            char[] arr = new char[2];
+            arr[0] = s.charAt(0);
+            arr[1] = s.charAt(2);
+            //用来判别只有一组数据  例如：C J 代表甲获胜最多的是C  乙获胜最多的是B(提交没有case过的例子，有点懵)
+            if (num == 1 && isWin(arr)) {
+                //将甲获胜的手势记录到甲对应map中
+                counts(MAP_FIRST, arr[0]);
+                for (int i = 0; i < CHARS.length; i++) {
+                    //找出乙获胜的手势
+                    if (CHARS[i] != arr[0] && CHARS[i] != arr[1]) {
+                        //将乙获胜的手势记录到乙对应map中
+                        counts(MAP_SECOND, CHARS[i]);
+                    }
+                }
+                break;
+                //用来判别只有一组数据,乙获胜
+            } else if (num == 1 && isWin(arr) && !isDraw(arr)) {
+                //将乙获胜的手势记录到甲对应map中
+                counts(MAP_SECOND, arr[1]);
+                for (int i = 0; i < CHARS.length; i++) {
+                    //找出甲获胜的手势
+                    if (CHARS[i] != arr[0] && CHARS[i] != arr[1]) {
+                        //将甲获胜的手势记录到甲对应map中
+                        counts(MAP_FIRST, CHARS[i]);
+                    }
+                }
+                break;
+            } else {
+                //如果是平局什么都不做，继续判断下一组手势
+                if (isDraw(arr)) {
+                    continue;
+                    //如果甲获胜
+                } else if (isWin(arr)) {
+                    //将甲获胜的手势记录到甲对应map中
+                    counts(MAP_FIRST, arr[0]);
+                    //如果乙获胜
+                } else if (!isWin(arr) && !isDraw(arr)) {
+                    //将乙获胜的手势记录到乙对应map中
+                    counts(MAP_SECOND, arr[1]);
+                }
+            }
+        }
+        //甲的胜、平、负次数
+        System.out.println(FIRST + " " + DRAW  + " " + (num - FIRST - DRAW));
+        //乙的胜、平、负次数
+        System.out.println((num - FIRST - DRAW) + " " + DRAW + " " + FIRST);
+        //甲、乙获胜次数最多的手势
+        System.out.println(findWins(MAP_FIRST) + " " + findWins(MAP_SECOND));
+    }
+    
+    private static boolean isWin(char[] arr) {
+        if (arr[0] == 'C' && arr[1] == 'J') {
+            FIRST++;
+            return true;
+        } else if (arr[0] == 'J' && arr[1] == 'B') {
+            FIRST++;
+            return true;
+        }else if (arr[0] == 'B' && arr[1] == 'C') {
+            FIRST++;
+            return true;
+        }
+        //排除不是平局的情况，才能确定是乙赢了
+        if (!isDraw(arr)) {
+            return false;
+        }
+        return false;
+    }
+
+    //判断是否是平局
+    private static boolean isDraw(char[] arr) {
+        if (arr[0] == 'C' && arr[1] == 'C') {
+            DRAW++;
+            return true;
+        }else if (arr[0] == 'J' && arr[1] == 'J') {
+            DRAW++;
+            return true;
+        }else if (arr[0] == 'B' && arr[1] == 'B') {
+            DRAW++;
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private static void counts(Map<Character, Integer> m, char c){
+        int n = m.getOrDefault(c, 0);
+        m.put(c, n+1);
+    }
+    
+    private static char findWins(Map<Character, Integer> map) {
+        //赋给其超过'C' 'J' 'B'值的字母，来寻找字母序小的胜利手势
+        char firstWin ='Z';
+        //胜利手势的次数
+        int firstCount = 0;
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            char key = entry.getKey();
+            int  val = entry.getValue();
+            //当胜利手势次数大于之前的时候,并且字母序小就去判断
+            if (val > firstCount && key < firstWin) {
+                firstWin = key;
+                firstCount = val;
+            }
+        }
+        return firstWin;
+    }
+}
+
+

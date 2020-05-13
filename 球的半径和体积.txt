@@ -1,0 +1,33 @@
+■题目描述
+输入球的中心点和球上某-点的坐标，计算球的半径和体积
+输入描述: 
+球的中心点和球上某- -点的坐标，以如下形式输入: x0 y0 z0 x1 y1 z1
+输出描述:
+输入可能有多组，对于每组输入，输出球的半径和体积，并且结果保留三位小数
+为避免精度问题，PI值请使用arccos(-1)。
+示例1
+输入
+0 0 0 1 1 1
+输出
+1.732  21.766
+import java.util.*;
+import java.text.DecimalFormat;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            double x0 = sc.nextDouble();
+            double y0 = sc.nextDouble();
+            double z0 = sc.nextDouble();
+            double x1 = sc.nextDouble();
+            double y1 = sc.nextDouble();
+            double z1 = sc.nextDouble();
+            double radius = Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2) + Math.pow(z1-z0, 2));
+            double cubage = (4.0 / 3)* Math.acos(-1)* Math.pow(radius, 3);
+            System.out.println(new DecimalFormat("0.000").format(radius) + " " + new DecimalFormat("0.000").format(cubage));
+        }
+        sc.close();
+    }
+}
+

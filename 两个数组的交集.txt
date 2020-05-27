@@ -9,21 +9,19 @@
 说明：
 输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
 我们可以不考虑输出结果的顺序。
-public int[] intersect(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> m = new HashMap<>();
-        for(int i = 0; i < nums1.length; i++){
-            m.put(nums1[i], m.getOrDefault(nums1[i], 0)+1);
+public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> s1 = new HashSet<>();
+        for(Integer n : nums1){
+            s1.add(n);
         }
-        List<Integer> l = new ArrayList<>();
-        for(int i = 0; i < nums2.length;i++){
-            if(m.getOrDefault(nums2[i], -1) > 0){
-                l.add(nums2[i]);
-                m.put(nums2[i], m.get(nums2[i])-1); 
-            }
+        HashSet<Integer> s2 = new HashSet<>();
+        for(Integer n : nums2){
+            s2.add(n);
         }
-        int[] ret = new int[l.size()];
+        s1.retainAll(s2);
+        int[] ret = new int[s1.size()];
         int index = 0;
-        for(int n : l){
+        for(int n : s1){
             ret[index++] = n;
         }
         return ret;

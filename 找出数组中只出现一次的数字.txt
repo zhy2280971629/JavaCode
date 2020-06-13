@@ -1,0 +1,39 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            int ret1 = 0;
+            int ret2 = 0;
+            for(int i = 0; i < n; i++){
+                arr[i] = sc.nextInt();
+            }
+            int xor = 0;
+            for(int i = 0; i < n; i++){
+                xor ^= arr[i];
+            }
+            int temp = 1;
+            while((xor & 1) != 1){
+                temp <<= 1;
+                xor >>= 1;
+            }
+            for(int i = 0; i < n; i++){
+                if((arr[i] & temp) == temp){
+                    ret1 ^= arr[i];
+                }
+                else{
+                    ret2 ^= arr[i];
+                }
+            }
+            if(ret1 < ret2){
+                int temp1 = ret1;
+                ret1 = ret2;
+                ret2 = temp1;
+            }
+            System.out.println(ret2 + " " + ret1);
+        }
+        sc.close();
+    }
+}

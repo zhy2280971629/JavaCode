@@ -1,0 +1,50 @@
+题目描述
+给定两个单词word1和word2，请计算将word1转换为word2至少需要多少步操作。
+你可以对一个单词执行以下3种操作：
+a）在单词中插入一个字符
+b）删除单词中的一个字符
+c）替换单词中的一个字符
+
+示例1
+输入
+"b",""
+输出
+1
+示例2
+输入
+"ab","bc"
+输出
+2
+import java.util.*;
+
+public class Solution {
+    /**
+     * 
+     * @param word1 string字符串 
+     * @param word2 string字符串 
+     * @return int整型
+     */
+    public int minDistance (String word1, String word2) {
+        // write code here
+        int l1 = word1.length();
+        int l2 = word2.length();
+        int[][] minD = new int[l1+1][l2+1];
+        for(int i = 0; i <= l2; i++){
+            minD[0][i] = i;
+        }
+        for(int j = 0; j <= l1; j++){
+            minD[j][0] = j;
+        }
+        for(int i = 1; i <= l1; i++){
+            for(int j = 1; j <= l2; j++){
+                minD[i][j] = 1 + Math.min(minD[i-1][j], minD[i][j-1]);
+                if(word1.charAt(i-1) == word2.charAt(j-1)){
+                    minD[i][j] = Math.min(minD[i-1][j-1], minD[i][j]);
+                }else{
+                    minD[i][j] = Math.min(minD[i][j], 1 + minD[i-1][j-1]);
+                }
+            }
+        }
+        return minD[l1][l2];
+    }
+}

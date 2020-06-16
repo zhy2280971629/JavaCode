@@ -1,0 +1,41 @@
+题目描述
+给定一个字符串S和一个字符串T，计算S中的T的不同子序列的个数。
+字符串的子序列是由原来的字符串删除一些字符（也可以不删除）在不改变相对位置的情况下的剩余字符（例如，"ACE"is a subsequence of"ABCDE"但是"AEC"不是）
+例如：
+S ="rabbbit", T ="rabbit"
+返回3
+
+示例1
+输入
+"rabbbit","rabbit"
+输出
+3
+import java.util.*;
+
+
+public class Solution {
+    /**
+     * 
+     * @param S string字符串 
+     * @param T string字符串 
+     * @return int整型
+     */
+    public int numDistinct (String S, String T) {
+        int s = S.length();
+        int t = T.length();
+        int[][] init = new int[s+1][t+1];
+        for(int i = 0; i <= s; i++){
+            init[i][0] = 1;
+        }
+        for(int i = 1; i <= s; i++){
+            for(int j = 1; j <= t; j++){
+                if(S.charAt(i-1) == T.charAt(j-1)){
+                    init[i][j] = init[i-1][j] + init[i-1][j-1];
+                }else{
+                    init[i][j] = init[i-1][j];
+                }
+            }
+        }
+        return init[s][t];
+    }
+}

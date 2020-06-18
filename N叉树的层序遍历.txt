@@ -1,0 +1,32 @@
+给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。
+说明:
+1.树的深度不会超过 1000。
+2.树的节点总数不会超过 5000。
+public List<List<Integer>> levelOrder(Node root) {      
+        List<List<Integer>> ret = new ArrayList<>();
+        if(root == null){
+            return ret;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            //获取当前层元素个数
+            int size = q.size();
+            //临时存放当前层节点
+            List<Integer> l = new ArrayList<>();
+            while(size-- != 0){
+                Node node = q.peek();
+                q.poll();
+                l.add(node.val);
+                for(Node child: node.children){
+                    if(child != null){
+                        q.offer(child);
+                    }
+                }
+            }
+            if(!l.isEmpty()){
+                ret.add(l);
+            }
+        }
+        return ret;
+    }

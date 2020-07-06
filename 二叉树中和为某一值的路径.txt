@@ -1,0 +1,38 @@
+import java.util.*;
+/**
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    private ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
+        if(root == null) return result;
+        ArrayList<Integer> cur = new ArrayList<Integer>();
+        hasPath(root, target, cur);
+        return result;
+    }
+    
+   public void hasPath(TreeNode node, int target, ArrayList<Integer> cur){
+       if(node == null)
+           return;
+       cur.add(node.val);
+       if(node.val == target && node.left == null && node.right == null){
+           result.add(cur);
+           return ;
+       }
+       ArrayList<Integer> left = (ArrayList<Integer>)cur.clone();
+       ArrayList<Integer> right = (ArrayList<Integer>)cur.clone();
+       cur = null;
+       hasPath(node.left, target - node.val, left);
+       hasPath(node.right, target - node.val, right);
+   }
+}

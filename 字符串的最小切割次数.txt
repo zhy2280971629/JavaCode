@@ -1,0 +1,59 @@
+题目描述
+给出一个字符串s，分割s使得分割出的每一个子串都是回文串
+计算将字符串s分割成回文分割结果的最小切割数
+例如:给定字符串s="aab",
+返回1，因为回文分割结果["aa","b"]是切割一次生成的。
+
+Given a string s, partition s such that every substring of the partition is a palindrome.
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+For example, given s ="aab",
+Return1since the palindrome partitioning["aa","b"]could be produced using 1 cut.
+
+示例1
+输入
+"aab"
+输出
+1
+import java.util.*;
+
+
+public class Solution {
+    /**
+     * 
+     * @param s string字符串 
+     * @return int整型
+     */
+    public int minCut (String s) {
+        int length = s.length();
+        int[] minCut = new int[length+1];
+        for(int i = 0; i <= length; i++){
+            minCut[i] = i - 1;
+        }
+        for(int i = 2; i <= length; i++){
+            //整体是否为回文串
+            if(isPal(s, 0, i-1)){
+                minCut[i] = 0;
+                continue;
+            }
+            //j < i
+            for(int j = 1; j < i; j++){
+                //[j+1, i]是否为回文串
+                if(isPal(s, j, i-1)){
+                    minCut[i] = Math.min(minCut[i], minCut[j]+1);
+                }
+            }
+        }
+        return minCut[length];
+    }
+    public boolean isPal(String s, int start, int end){
+        while(start < end){
+            if(s.charAt(start) != s.charAt(end)){
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}

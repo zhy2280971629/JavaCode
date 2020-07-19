@@ -1,0 +1,33 @@
+题目描述
+一个机器人在m×n大小的地图的左上角（起点，下图中的标记“start"的位置）。
+机器人每次向下或向右移动。机器人要到达地图的右下角。（终点，下图中的标记“Finish"的位置）。
+可以有多少种不同的路径从起点走到终点？
+
+
+上图是3×7大小的地图，有多少不同的路径？
+备注：m和n小于等于100
+import java.util.*;
+public class Solution {
+    /**
+     * 
+     * @param m int整型 
+     * @param n int整型 
+     * @return int整型
+     */
+    public int uniquePaths (int m, int n) {
+        List<List<Integer>> pathNum = new ArrayList<>();
+        for(int i = 0; i < m; i++){
+            pathNum.add(new ArrayList<>());
+            pathNum.get(i).add(1);
+        }
+        for(int i = 1; i < n; i++){
+            pathNum.get(0).add(1);
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                pathNum.get(i).add(pathNum.get(i-1).get(j) + pathNum.get(i).get(j-1));
+            }
+        }
+        return pathNum.get(m-1).get(n-1);
+    }
+}

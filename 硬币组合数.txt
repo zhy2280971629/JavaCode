@@ -1,0 +1,37 @@
+给定若干种硬币的面值和一个总金额，写一个函数计算不同的组合种类数量，要求每种面值硬币组合的金额都是给定的金额。 每种面值的硬币数量都无上限。
+注意
+0<= 金额amount <= 5000
+1<= 面值coin <= 5000
+面值种类小于500
+答案小于32位的正整数范围
+举例1：
+输入： amount = 5, coins = [1, 2, 5]
+输出： 4
+解释： 有四种组合形式，分别如下：
+5 = 5
+5 = 2+2+1
+5 = 2+1+1+1
+5 = 1+1+1+1+1
+举例2：
+输入: amount = 3, coins = [2]
+输出: 0
+解释: 3 无法用面值2表示
+ public static int countWays(int[] coin, int amount) {
+        if (amount < 0 || amount > 5000 || coin.length > 500) {
+            return 0;
+        }
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int i = 0; i < coin.length; ++i) {
+            if(coin[i] < 1 || coin[i] > 5000){
+                return 0;
+            }
+            for (int j = coin[i]; j <= amount; ++j) {
+                dp[j] += dp[j - coin[i]];
+            }
+        }
+        if (dp[amount] < 0 || String.valueOf(dp[amount]).length() > 32) {
+            return 0;
+        }
+        return dp[amount];
+    }
